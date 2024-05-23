@@ -12,6 +12,7 @@ RoxygenNote: 7.3.1
 URL: https://github.com/janreiter793/mcintegration
 BugReports: https://github.com/janreiter793/mcintegration/issues
 Suggests: 
+    devtools,
     knitr,
     rmarkdown,
     tinytest

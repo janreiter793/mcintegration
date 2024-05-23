@@ -14,6 +14,35 @@ knitr::opts_chunk$set(
 )
 ```
 
+# Numerical Integration Using Monte Carlo
+
+This package introduces the object class \texttt{mcintegrator}, which can be used to numerically estimate definite integrals of positive monotone functions. Corresponding print, summary,  and plot availability is included.
+
+In the following example two mcintegrator objects are created for two different positive monotone functions.
 ```{r setup}
+library(devtools)
+devtools::load_all()
 library(mcintegration)
+
+a <- mcintegrator(sin, 0, pi / 2)
+b <- mcintegrator(function(x) { x }, 0, 5)
+
+summary(a)
+print(b)
+add(a, b)
+subtract(a, b)
 ```
+The example above, shows how to initialize two mcintegrator objects, for calculating the following definite integrals:
+\begin{equation}
+  \int_{0}^{\pi/2}\sin(s)ds,\quad\int_{0}^{5}sds,
+\end{equation}
+respectively.
+The summary function shows the approximated value of the integral, the fineness is the number of Monte Carlo samples, and interval specifies the interval for which the function was integrated over. Printing a mcintegrator object outputs only the result. Notice, that the add function returns the sum of the results of both objects. Likewise does the subtract function return the result of $a$ minus the result of $b$.
+
+The package does also support plotting mcintegrator objects. The following example shows the plot of $a$ and $b$.
+```{r}
+plot(a)
+plot(b)
+```
+
+The plot shows with red, the integrand function. The blue points are the Monte Carlo samples below the curve, and the pink points the Monte Carlo samples above the curve.
